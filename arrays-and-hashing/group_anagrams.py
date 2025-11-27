@@ -1,7 +1,7 @@
 from typing import List
 from collections import defaultdict
 
-def groupAnagrams(strs: List[str]) -> List[List[str]]:
+def groupAnagramsASCII(strs: List[str]) -> List[List[str]]:
 
     group_anagrams = defaultdict(list)
     for s in strs:
@@ -13,9 +13,19 @@ def groupAnagrams(strs: List[str]) -> List[List[str]]:
     
     return group_anagrams.values()
 
+def groupAnagramsChar(strs: List[str]) -> List[List[str]]:
+
+    group_anagrams = defaultdict(list)
+    for word in strs:
+        key = tuple(sorted(word))
+        group_anagrams[key].append(word)
+    return list(group_anagrams.values())
+
+
+
 if __name__ == "__main__":
     input_strs = input("Enter a list of strings separated by spaces: ")
     strs_list = input_strs.split()
 
-    result = groupAnagrams(strs_list)
+    result = groupAnagramsChar(strs_list)
     print("Grouped anagrams:", list(result))

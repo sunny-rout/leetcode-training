@@ -23,3 +23,27 @@ We can use a hash map to group the anagrams, with the character count acting as 
 
 * **Space complexity:** O(m * n)
     In the worst case, we need to store all the characters of all the strings in our hash map.
+
+---
+
+### Alternative Approach: Sorting
+
+#### Intuition
+
+A more straightforward way to generate a unique signature for an anagram group is to sort the characters of the string. If two strings are anagrams, their sorted versions will be identical. For example, sorting "eat", "tea", and "ate" all result in "aet". This sorted string can be used as a key in a hash map to group the anagrams.
+
+#### Approach
+
+1. Initialize an empty hash map, like `defaultdict(list)`.
+2. Iterate through each string in the input list.
+3. For each string, sort its characters to create a canonical key (e.g., `tuple(sorted(word))`).
+4. Use this key to append the original string to the corresponding list in the hash map.
+5. After processing all strings, the values of the hash map will contain the grouped anagrams.
+
+#### Complexity
+
+* **Time complexity:** O(m * n log n)
+  Where `m` is the number of strings and `n` is the average length of a string. For each of the `m` strings, we sort its characters, which takes O(n log n) time.
+
+* **Space complexity:** O(m * n)
+  The total information stored in the hash map is proportional to the total number of characters in all strings.
